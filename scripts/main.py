@@ -1,22 +1,17 @@
 import os
 import sys
-import socket
+import subprocess
 
 def get_public_ip():
+	result = subprocess.run("curl ifconfig.me", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+	return (result.stdout)
+
+def get_local_ip():
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		sock.connect(("8.8.8.8", 80))
 		public_ip = sock.getsockname()[0]
 		return str(public_ip)
-	except:
-		pass
-	return ("0.0.0.0")
-
-def get_local_ip():
-	return ("0.0.0.0")
-	try:
-		local_ip = socket.gethostbyname(socket.gethostname())
-		return str(local_ip)
 	except:
 		pass
 	return ("0.0.0.0")
