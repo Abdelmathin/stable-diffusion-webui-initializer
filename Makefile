@@ -5,3 +5,6 @@ webui:
 
 no-webui:
 	@${PYTHON} scripts/main.py --nowebui --port 80 --listen
+
+init:
+	@${PYTHON} scripts/init.py
