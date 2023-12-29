@@ -11,4 +11,4 @@ commands = [
 
 if (__name__ == "__main__"):
 	for cmd in commands:
-		print (cmd)
+		os.system (cmd)
