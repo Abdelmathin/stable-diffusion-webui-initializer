@@ -8,3 +8,7 @@ no-webui:
 
 init:
 	@${PYTHON} scripts/init.py
+
+init-pod:
+	@${PYTHON} scripts/initpod.py
+
