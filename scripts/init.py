@@ -21,5 +21,5 @@ if (__name__ == "__main__"):
 		os.system (cmd)
 	for model_path, model_url in models.items():
 		model_file = ST_DIR + "/models/" + model_path
-		if  os.path.exists(model_file):
+		if not os.path.exists(model_file):
 			print ('cd "' + CVT_DIR + '" && python3 script.py "' + model_url + '" "' + model_file + '"')
