@@ -17,6 +17,20 @@ models = {
 	"Lora/picture-books-children-cartoon.safetensors" : "https://civitai.com/api/download/models/198105"
 }
 
+def change_output_image_prefix(prefix = "txt2img"):
+	filename = ST_DIR + "/modules/images.py"
+	content  = ""
+	for line in open(filename):
+		magic_key = '''if basename == '' else f"{basename}-{basecount + i:04}"'''
+		if magic_key in line:
+			_line = line.strip().replace(" ", "")
+			if _line.startswith("fn="):
+				tabs = line[:line.index("fn")]
+				line = tabs + 'fn = "' + prefix + '" #' + magic_key + "\n"
+		content += line
+	with open(filename, "w") as fp:
+		fp.write(content)
+
 if (__name__ == "__main__"):
 	for cmd in commands:
 		os.system (cmd)
@@ -24,3 +38,4 @@ if (__name__ == "__main__"):
 		model_file = ST_DIR + "/models/" + model_path
 		if not os.path.exists(model_file):
 			os.system ('cd "' + CVT_DIR + '" && python3 script.py "' + model_url + '" "' + model_file + '"')
+	change_output_image_prefix()
