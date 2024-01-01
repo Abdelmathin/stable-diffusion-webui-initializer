@@ -13,7 +13,8 @@ commands = [
 ]
 
 models = {
-	"Stable-diffusion/sd_xl_base_1.0.safetensors" : "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors?download=true"
+	"Stable-diffusion/sd_xl_base_1.0.safetensors"     : "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors?download=true",
+	"Lora/picture-books-children-cartoon.safetensors" : "https://civitai.com/api/download/models/198105"
 }
 
 if (__name__ == "__main__"):
