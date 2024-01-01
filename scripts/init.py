@@ -17,7 +17,7 @@ models = {
 	"Lora/picture-books-children-cartoon.safetensors" : "https://civitai.com/api/download/models/198105"
 }
 
-def change_output_image_prefix(prefix = "txt2img"):
+def change_output_image_prefix(prefix = "img"):
 	filename = ST_DIR + "/modules/images.py"
 	content  = ""
 	for line in open(filename):
