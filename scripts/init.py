@@ -17,7 +17,7 @@ models = {
 	"Lora/picture-books-children-cartoon.safetensors" : "https://civitai.com/api/download/models/198105"
 }
 
-def change_output_image_prefix(prefix = "img"):
+def change_output_image_prefix(default = "img"):
 	filename = ST_DIR + "/modules/images.py"
 	content  = ""
 	for line in open(filename):
@@ -26,7 +26,21 @@ def change_output_image_prefix(prefix = "img"):
 			_line = line.strip().replace(" ", "")
 			if _line.startswith("fn="):
 				tabs = line[:line.index("fn")]
-				line = tabs + 'fn = "' + prefix + '" #' + magic_key + "\n"
+				line = tabs + 'fn = ' + "os.environ.get('OUTPUT_IMAGE_PREFIX', '" + default + "')" + ' #' + magic_key + "\n"
+		content += line
+	with open(filename, "w") as fp:
+		fp.write(content)
+
+def change_outputs_dirname():
+	filename = ST_DIR + "/modules/images.py"
+	content  = ""
+	for line in open(filename):
+		magic_key = '''dirname = namegen.apply(opts.directories_filename_pattern'''
+		if magic_key in line:
+			_line = line.strip().replace(" ", "")
+			if _line.startswith("dirname="):
+				tabs = line[:line.index("dirname")]
+				line = tabs + 'dirname = ' + "os.environ.get('DIRECTORIES_FILENAME_PATTERN', '')" + ' # ' + magic_key + "\n"
 		content += line
 	with open(filename, "w") as fp:
 		fp.write(content)
@@ -39,3 +53,4 @@ if (__name__ == "__main__"):
 		if not os.path.exists(model_file):
 			os.system ('cd "' + CVT_DIR + '" && python3 script.py "' + model_url + '" "' + model_file + '"')
 	change_output_image_prefix()
+	change_outputs_dirname()
