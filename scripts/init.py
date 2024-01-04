@@ -47,13 +47,13 @@ def change_outputs_dirname():
 
 def init_runpod():
 	try:
-		pre_script         = ROOT_DIR + "/scripts/runpod/pre_script.sh"
-		pre_script_content = open(pre_script).read()
-		with open("/pre_script.sh", "w") as fp:
+		pre_start          = ROOT_DIR + "/scripts/runpod/pre_start.sh"
+		pre_script_content = open(pre_start).read()
+		with open("/pre_start.sh", "w") as fp:
 			fp.write(pre_script_content)
 	except:
 		pass
-	os.system("chmod +x /pre_script.sh")
+	os.system("chmod +x /pre_start.sh")
 
 if (__name__ == "__main__"):
 	init_runpod()
