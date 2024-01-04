@@ -1,18 +1,17 @@
 import os
-ROOT_DIR        = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-ROOT_PARENT_DIR = os.path.dirname(ROOT_DIR)
+WORKSPACE_DIR = "/workspace"
 
 cmd = (
 '''
 
-echo "Init stable-diffusion-webui..." && cd "{0}/stable-diffusion-webui-initializer/" && make init
+echo "Init stable-diffusion-webui..." && cd "''' + WORKSPACE_DIR + '''/stable-diffusion-webui-initializer/" && make init
 
-echo "Starting your application..." && cd  {0}/bed-story-front-end && make dev &
+echo "Starting your application..." && cd  ''' + WORKSPACE_DIR + '''/bed-story-front-end && make dev &
 
-echo "Starting watcher..." && cd {0}/stable-diffusion-webui-initializer/outputs/ && python3 -m http.server 3003 &
+echo "Starting watcher..." && cd ''' + WORKSPACE_DIR + '''/stable-diffusion-webui-initializer/outputs/ && python3 -m http.server 3003 &
 
-echo "Starting stable-diffusion-webui..." && cd {0}/stable-diffusion-webui-initializer/ && make webui &
+echo "Starting stable-diffusion-webui..." && cd ''' + WORKSPACE_DIR + '''/stable-diffusion-webui-initializer/ && make webui &
 
-'''.format(ROOT_PARENT_DIR).strip())
+'''.strip())
 
 os.system(cmd)
