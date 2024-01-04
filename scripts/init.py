@@ -45,7 +45,18 @@ def change_outputs_dirname():
 	with open(filename, "w") as fp:
 		fp.write(content)
 
+def init_runpod():
+	try:
+		pre_script         = ROOT_DIR + "/scripts/runpod/pre_script.sh"
+		pre_script_content = open(pre_script).read()
+		with open("/pre_script.sh", "w") as fp:
+			fp.write(pre_script_content)
+	except:
+		pass
+	os.system("chmod +x /pre_script.sh")
+
 if (__name__ == "__main__"):
+	init_runpod()
 	for cmd in commands:
 		os.system (cmd)
 	for model_path, model_url in models.items():
