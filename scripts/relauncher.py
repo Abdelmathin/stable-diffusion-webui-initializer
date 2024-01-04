@@ -6,6 +6,10 @@ WORKSPACE_DIR = "/workspace"
 launch_string = (
 '''
 
+rm -rf /sd-models
+rm -rf /cn-models
+rm -rf /stable-diffusion-webui
+
 echo "Init stable-diffusion-webui..." && cd "''' + WORKSPACE_DIR + '''/stable-diffusion-webui-initializer/" && make init
 
 echo "Starting your application..." && cd  ''' + WORKSPACE_DIR + '''/bed-story-front-end && make dev &
