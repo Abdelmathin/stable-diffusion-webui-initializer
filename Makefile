@@ -5,10 +5,10 @@ start:
 	@${PYTHON} relauncher.py &
 
 webui:
-	@${PYTHON} scripts/main.py --port 3001 --listen --api
+	@${PYTHON} scripts/main.py --port 3002 --listen --api
 
 no-webui:
-	@${PYTHON} scripts/main.py --nowebui --port 3001 --listen --api
+	@${PYTHON} scripts/main.py --nowebui --port 3002 --listen --api
 
 init:
 	@${PYTHON} scripts/init.py
