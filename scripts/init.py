@@ -1,10 +1,15 @@
 import os
-ST_REPO_URL     = "https://github.com/AUTOMATIC1111/stable-diffusion-webui.git"
-CVT_REPO_URL    = "https://github.com/Abdelmathin/civitai-models-downloader.git"
-ROOT_DIR        = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-ROOT_PARENT_DIR = os.path.dirname(ROOT_DIR)
-ST_DIR          = ROOT_PARENT_DIR + "/stable-diffusion-webui"
-CVT_DIR         = ROOT_PARENT_DIR + "/civitai-models-downloader"
+import utils
+import config
+import requests
+
+ST_REPO_URL        = "https://github.com/AUTOMATIC1111/stable-diffusion-webui.git"
+CVT_REPO_URL       = "https://github.com/Abdelmathin/civitai-models-downloader.git"
+INSTANTID_REPO_URL = "https://github.com/InstantID/InstantID.git"
+ROOT_DIR           = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+ROOT_PARENT_DIR    = os.path.dirname(ROOT_DIR)
+ST_DIR             = ROOT_PARENT_DIR + "/stable-diffusion-webui"
+CVT_DIR            = ROOT_PARENT_DIR + "/civitai-models-downloader"
 commands = [
 	"sudo apt-get update",
 	"sudo apt-get install pip",
@@ -49,6 +54,23 @@ def change_relauncher():
 	content = open(ROOT_DIR + "/scripts/relauncher.py").read()
 	with open(ST_DIR + "/relauncher.py", "w") as fp:
 		fp.write(content)
+
+def clone_instant_id():
+	stable_diffusion_directory = utils.get_stable_diffusion_webui_dir()
+	instantid_directory        = utils.join_path(stable_diffusion_directory, "InstantID")
+	instantid_clone_command    = "git clone '{0}' '{1}'".format(INSTANTID_REPO_URL, instantid_directory)
+	instantid_models_directory = utils.join_path(instantid_directory, "models")
+	os.system(instantid_clone_command)
+	utils.create_directory(instantid_models_directory)
+	antelopev2_content = requests.get("https://drive.usercontent.google.com/download?id=18wEUfMNohBJ4K3Ly5wpTejPfDzp-8fI8&export=download&authuser=0&confirm=t&uuid=a77d00b9-9fc5-46d6-98c0-cf1e24d366d4&at=APZUnTVwBOWdw7amPPudnhJc6LOk%3A1706999007535").content
+	antelopev2_zip     = utils.join_path(instantid_models_directory, "antelopev2.zip")
+	with open(antelopev2_zip, "wb") as fp:
+		fp.write(antelopev2_content)
+	os.system ("cd '" + str(instantid_models_directory) + "' && unzip antelopev2.zip")
+
+clone_instant_id()
+
+exit()
 
 if (__name__ == "__main__"):
 	change_relauncher()
