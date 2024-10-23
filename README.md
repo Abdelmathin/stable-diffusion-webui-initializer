@@ -1,5 +1,12 @@
 # Stable Diffusion WebUI Initializer
 
+<p align="center">
+    <a href="" target="_blank">
+        <img style="border-radius: 10px;" src="docs/assets/img/banner.png" width="800" alt="Abstract VM" />
+    </a>
+</p>
+
+
 Welcome to the **Stable Diffusion WebUI Initializer** repository! This repository provides tools to easily initialize and manage the Stable Diffusion WebUI. With the included `Makefile`, you can quickly start the WebUI, launch it in different modes, or initialize it with a single command.
 
 ---
